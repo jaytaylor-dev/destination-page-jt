@@ -1,0 +1,16 @@
+header.container, #user_input_form {
+    align-items: center;
+    padding: 2 rem;
+}
+
+header.container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
+#user_input_form input, #user_input_form textarea {
+    margin: 2rem;
+}
