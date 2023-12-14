@@ -18,6 +18,14 @@ user_input_form.addEventListener("submit", (e) => {
     cards_container.appendChild(card)
 
 })
+// when edit or delete is clicked
+cards_container.addEventListener("click", (e) => {
+    const clickedElt = e.target;
+
+    if(clickedElt.getAttribute("btn_type") === "delete") {
+        clickedElt.parentElement.parentElement.remove();
+    }
+})
 
 function createCard({destinationName, locationName, photoUrl, desc}) {
 
@@ -36,9 +44,26 @@ function createCard({destinationName, locationName, photoUrl, desc}) {
         <h5 class="card-title">${destinationName}</h5>
         <p class="card-text">${locationName}</p>
         ${desc &&`<p class="card-text">${desc}</p>`}
-        <button type="button" class="btn butn-info">Edit</button>
-        <button type="button" class="btn btn-danger">Delete</button>
+        <button type="button" btn_type="edit_btn" class="btn butn-info">Edit</button>
+        <button type="button" btn_type="delete_btn" class="btn btn-danger">Delete</button>
     </div> 
     `;
     return card;
+}
+
+function handleEdit(editBtn) {
+
+    const cardBody = editBtn.parentElement;
+
+    const oldDestName = cardbody.children[0];
+    const oldLocName = cardBody.children[0].textContent;
+    const oldPhotoUrl = cardBody.previousSiblingElement.getAttribute("src");
+    const oldDesc = cardBody.children[2].tagName === "P" ? cardBody.children[2].textContent : "";
+
+
+    const newDestName = prompt("Please enter a new destination: ", oldDestName)
+    const newLocName = prompt("Please enter a new location: ", oldLocName)
+    const newPhotoUrl = prompt("Please enter a url for the photo", oldPhotoUrl)
+    const newDescription = prompt("Please enter a new description", oldDesc)
+
 }
